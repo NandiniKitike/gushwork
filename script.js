@@ -1,3 +1,4 @@
+// Hero carousel image sources (used by both the main image + thumbnails)
 const heroSlides = [
   "assets/imgone.png",
   "assets/imgone.png",
@@ -7,6 +8,7 @@ const heroSlides = [
   "assets/imgone.png",
 ];
 
+// --- Hero carousel (prev/next, thumbnails, and hover zoom lens) ---
 const carousel = document.querySelector("[data-carousel]");
 if (carousel) {
   const mainImage = carousel.querySelector(".carousel-image");
@@ -18,6 +20,7 @@ if (carousel) {
   const mainBox = carousel.querySelector(".carousel-main");
   let current = 0;
 
+  // Updates the active slide and syncs thumb active state + zoom background
   const setSlide = (index) => {
     current = (index + heroSlides.length) % heroSlides.length;
     mainImage.src = heroSlides[current];
@@ -27,13 +30,16 @@ if (carousel) {
     });
   };
 
+  // Slide navigation
   prevBtn.addEventListener("click", () => setSlide(current - 1));
   nextBtn.addEventListener("click", () => setSlide(current + 1));
 
+  // Thumb click jumps directly to that slide
   thumbs.forEach((thumb, idx) => {
     thumb.addEventListener("click", () => setSlide(idx));
   });
 
+  // Zoom activates only while hovering the main image area
   mainBox.addEventListener("mouseenter", () => mainBox.classList.add("zooming"));
   mainBox.addEventListener("mouseleave", () => mainBox.classList.remove("zooming"));
 
@@ -46,7 +52,7 @@ if (carousel) {
   setSlide(0);
 }
 
-// Carousel Zoom Lens Helper
+// Carousel zoom lens helper: positions lens and updates the zoom-preview background
 function moveLens(event) {
   const lens = document.querySelector(".zoom-lens");
   const preview = document.querySelector(".zoom-preview");
@@ -74,6 +80,7 @@ function moveLens(event) {
   preview.style.backgroundPosition = "-" + x * cx + "px -" + y * cy + "px";
 }
 
+// --- FAQ accordion: only one item open at a time ---
 const faqItems = document.querySelectorAll(".faq-item");
 faqItems.forEach((item) => {
   const button = item.querySelector(".faq-question");
@@ -89,10 +96,12 @@ faqItems.forEach((item) => {
 
 if (faqItems.length) {
   faqItems.forEach((item, idx) => {
+    // Open the first FAQ item by default
     item.classList.toggle("open", idx === 0);
   });
 }
 
+// --- Horizontal apps carousel: scroll controls for mobile/tablet ---
 const appsCarousel = document.querySelector("[data-apps-carousel]");
 if (appsCarousel) {
   const prev = document.querySelector("[data-apps-prev]");
@@ -107,6 +116,7 @@ if (appsCarousel) {
   });
 }
 
+// --- Process steps: drives the "How we manufacture" tabbed content ---
 const processSteps = [
   {
     title: "High-Grade Raw Material Selection",
@@ -169,6 +179,7 @@ if (processTabs.length) {
   const nextBtn = document.getElementById("processNext");
   let currentStep = 0;
 
+  // Renders a step (title, copy, bullets, image) and updates active tab + badge
   const updateStep = (index) => {
     currentStep = index;
     const step = processSteps[index];
@@ -198,7 +209,7 @@ if (processTabs.length) {
   updateStep(0);
 }
 
-// Mobile Menu Toggle
+// --- Mobile menu: slide-in nav + page overlay lock ---
 const menuToggle = document.querySelector(".menu-toggle");
 const navActions = document.querySelector(".nav-actions");
 const body = document.body;
