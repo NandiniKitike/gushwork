@@ -63,7 +63,8 @@ button {
 
 .container {
   width: 100%;
-  max-width: var(--max);
+  /* Inner content area stays at 1240px (var(--max)) while keeping 100px gutters */
+  max-width: calc(var(--max) + 200px);
   margin: 0 auto;
   padding: 0 100px;
 }
@@ -1661,7 +1662,9 @@ button {
 }
 
 .footer {
-  background: #fff;
+  background: #f6f7fb;
+  background-image: radial-gradient(rgba(17, 24, 39, 0.06) 0.6px, transparent 0.6px);
+  background-size: 4px 4px;
 }
 
 .footer-top {
@@ -1670,33 +1673,37 @@ button {
   gap: 24px;
   align-items: center;
   border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 18px 24px;
+  border-radius: 16px;
+  padding: 22px 28px;
   margin-bottom: 36px;
   background: #ffffff;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
 }
 
 .logo-box {
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 6px 10px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
 }
 
 .footer-tag {
   font-weight: 600;
+  font-size: 18px;
+  line-height: 1.25;
   color: #111827;
   text-align: left;
-  max-width: 520px;
+  max-width: 620px;
   justify-self: end;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
   align-items: flex-start;
 }
 
-.footer-tag span {
-  display: block;
+.footer-tag-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .footer-tag-highlight {
@@ -2835,12 +2842,13 @@ button {
 }
 
 .hero {
-  margin-top: 10px;
-  background: #ffffff;
+  margin-top: 0;
+  background: #f6f7fb;
 }
 
+/* Remove the extra top gap under the sticky header */
 .hero.section {
-  padding: 0;
+  padding-top: 0;
 }
 
 /* Removed .hero .container, .specs .container, .features .container max-width override to enforce 1240px */
@@ -2849,7 +2857,6 @@ button {
   width: 100%;
   padding: 40px;
   background: #ffffff;
-  border-top: 1px solid #e1e3e8;
   box-shadow: 0 16px 32px -12px rgba(88, 92, 95, 0.1);
 }
 
@@ -2975,9 +2982,9 @@ button {
 
 .trusted-row {
   width: 100%;
-  margin: 0 auto;
-  padding-top: 0;
-  border-top: none;
+  margin: 60px auto 0;
+  padding-top: 40px;
+  border-top: 1px solid #f3f4f6;
   text-align: center;
 }
 
@@ -3137,12 +3144,6 @@ button {
   width: 16px;
   height: 16px;
   margin: 0;
-}
-
-.features.section {
-  /* Padding is controlled by the shared .section responsive rules */
-  padding-top: revert;
-  padding-bottom: revert;
 }
 
 .features .section-head {
